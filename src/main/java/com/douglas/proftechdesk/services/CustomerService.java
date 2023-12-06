@@ -48,7 +48,6 @@ public class CustomerService {
 	public Customer update(Integer id, @Valid CustomerDTO objDTO){
 	    Customer oldObj = findById(id);
 
-	    // Realizar a validação apenas se o CPF for alterado
 	    if (!oldObj.getCpf().equals(objDTO.getCpf())) {
 	      boolean cpfExists = personRepository.existsByCpf(objDTO.getCpf());
 	      if (cpfExists) {
@@ -56,7 +55,6 @@ public class CustomerService {
 	      }
 	    }
 
-	    // Realizar a validação apenas se o e-mail for alterado
 	    if (!oldObj.getEmail().equals(objDTO.getEmail())) {
 	      boolean emailExists = personRepository.existsByEmail(objDTO.getEmail());
 	      if (emailExists) {
@@ -68,11 +66,9 @@ public class CustomerService {
 	      oldObj.setPassword(encoder.encode(objDTO.getPassword()));
 	    }
 
-	    // Atualizar os campos necessários do objeto antigo
 	    oldObj.setName(objDTO.getName());
 	    oldObj.setCpf(objDTO.getCpf());
 	    oldObj.setEmail(objDTO.getEmail());
-	    // Atualize outros campos conforme necessário
 
 	    return customerRepository.save(oldObj);
 	  }

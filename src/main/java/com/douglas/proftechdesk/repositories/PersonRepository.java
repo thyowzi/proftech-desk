@@ -8,6 +8,9 @@ import com.douglas.proftechdesk.domain.Person;
 
 public interface PersonRepository extends JpaRepository<Person, Integer> {
 
-	Optional<Person> findByCpf(String cpf);
+	boolean existsByCpf(String cpf);
+
+	boolean existsByEmail(String email);
+
 	Optional<Person> findByEmail(String email);
 }
